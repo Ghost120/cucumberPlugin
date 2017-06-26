@@ -1,11 +1,11 @@
 <idea-plugin>
-    <id>com.your.company.unique.plugin.id</id>
-    <name>Plugin display name here</name>
-    <version>1.0</version>
+    <id>gherkin</id>
+    <name>Gherkin</name>
+    <description>Provides support of Gherkin language</description>
+    <version>999.999</version>
     <depends>com.intellij.modules.xml</depends>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
-
-    <idea-version since-build="145.0"/>
+    <idea-version since-build="136.0"/>
+    <vendor>JetBrains</vendor>
 
     <extensions defaultExtensionNs="com.intellij">
         <fileTypeFactory implementation="org.jetbrains.plugins.cucumber.psi.CucumberFileTypeFactory"/>
@@ -107,6 +107,25 @@
 
         <additionalTextAttributes scheme="Default" file="colorSchemes/GherkinDefault.xml"/>
         <additionalTextAttributes scheme="Darcula" file="colorSchemes/GherkinDarcula.xml"/>
+
+
+        <referencesSearch implementation="org.jetbrains.plugins.cucumber.referencesearch.steps.search.CucumberJavaStepDefinitionSearch"/>
+        <methodReferencesSearch implementation="org.jetbrains.plugins.cucumber.referencesearch.steps.search.CucumberJavaMethodUsageSearcher"/>
+        <runConfigurationProducer implementation="org.jetbrains.plugins.cucumber.referencesearch.run.CucumberJavaFeatureRunConfigurationProducer"/>
+        <runConfigurationProducer implementation="org.jetbrains.plugins.cucumber.referencesearch.run.CucumberJavaScenarioRunConfigurationProducer"/>
+        <runConfigurationProducer implementation="org.jetbrains.plugins.cucumber.referencesearch.run.CucumberJavaAllFeaturesInFolderRunConfigurationProducer"/>
+        <configurationType implementation="org.jetbrains.plugins.cucumber.referencesearch.run.CucumberJavaRunConfigurationType"/>
+
+        <implicitUsageProvider implementation="org.jetbrains.plugins.cucumber.referencesearch.steps.reference.CucumberJavaImplicitUsageProvider"/>
+
+        <localInspection language="JAVA" shortName="CucumberJavaStepDefClassIsPublic" displayName="Step definition class is not public"
+                         groupBundle="org.jetbrains.plugins.cucumber.referencesearch.CucumberJavaBundle" groupKey="cucumber.java.inspection.group.name" enabledByDefault="true"
+                         level="WARNING" implementationClass="org.jetbrains.plugins.cucumber.referencesearch.inspections.CucumberJavaStepDefClassIsPublicInspections"/>
+        <localInspection language="JAVA" shortName="CucumberJavaStepDefClassInDefaultPackage" displayName="Step definition class is in default package"
+                         groupBundle="org.jetbrains.plugins.cucumber.referencesearch.CucumberJavaBundle" groupKey="cucumber.java.inspection.group.name" enabledByDefault="true"
+                         level="WARNING" implementationClass="org.jetbrains.plugins.cucumber.referencesearch.inspections.CucumberJavaStepDefClassInDefaultPackageInspection"/>
+
+        <multiHostInjector implementation="org.jetbrains.plugins.cucumber.referencesearch.CucumberJavaInjector"/>
     </extensions>
 
     <extensionPoints>
