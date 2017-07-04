@@ -25,6 +25,7 @@ import org.jetbrains.plugins.cucumber.psi.impl.GherkinExamplesBlockImpl;
 import org.jetbrains.plugins.cucumber.psi.impl.GherkinScenarioOutlineImpl;
 import org.jetbrains.plugins.cucumber.steps.AbstractStepDefinition;
 import org.jetbrains.plugins.cucumber.steps.CucumberStepsIndex;
+import org.jetbrains.plugins.cucumber.steps.Renamer;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -208,6 +209,8 @@ public class CucumberCompletionContributor extends CompletionContributor {
     final List<AbstractStepDefinition> definitions = CucumberStepsIndex.getInstance(file.getProject()).getAllStepDefinitions(file);
     for (AbstractStepDefinition definition : definitions) {
       String text = definition.getCucumberRegex();
+      // вставил автодополнение
+      text = Renamer.getInstance().getChangeParam(text);
       if (text != null) {
         // trim regexp line start/end markers
         text = StringUtil.trimStart(text, "^");

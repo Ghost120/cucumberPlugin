@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>gherkin</id>
-    <name>Gherkin</name>
+    <name>Gherkin For TAG</name>
     <description>Provides support of Gherkin language</description>
     <version>999.999</version>
     <depends>com.intellij.modules.xml</depends>
