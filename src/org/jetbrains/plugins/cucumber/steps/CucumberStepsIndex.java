@@ -22,6 +22,7 @@ import org.jetbrains.plugins.cucumber.psi.GherkinFile;
 import org.jetbrains.plugins.cucumber.psi.GherkinStep;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author yole

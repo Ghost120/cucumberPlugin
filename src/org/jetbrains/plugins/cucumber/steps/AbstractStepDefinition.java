@@ -15,10 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.cucumber.CucumberUtil;
 import org.jetbrains.plugins.cucumber.psi.GherkinStep;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yole, Andrey Vokin
@@ -59,14 +56,14 @@ public abstract class AbstractStepDefinition {
   @Nullable
   public Pattern getPattern() {
     try {
-      final String cucumberRegex = getCucumberRegex();
+      //здесь подставляем нужный нам параметр
+      final String cucumberRegex = Renamer.getInstance().getChangeParam(getCucumberRegex());
       if (cucumberRegex == null) return null;
       if (myRegexText == null || !cucumberRegex.equals(myRegexText)) {
         final StringBuilder patternText = new StringBuilder(ESCAPE_PATTERN.matcher(cucumberRegex).replaceAll("(.*)"));
         if (patternText.toString().startsWith(CUCUMBER_START_PREFIX)) {
           patternText.replace(0, CUCUMBER_START_PREFIX.length(), "^");
         }
-
         if (patternText.toString().endsWith(CUCUMBER_END_SUFFIX)) {
           patternText.replace(patternText.length() - CUCUMBER_END_SUFFIX.length(), patternText.length(), "$");
         }
